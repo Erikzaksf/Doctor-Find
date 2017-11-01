@@ -3,6 +3,7 @@ import { DoctorSearch } from './../js/doctor.js'
 
 $(document).ready(function() {
   $('#searchParam').click(function() {
+    event.preventDefault();
     debugger
     let userSearch = $('#search').val();
     $('#search').val("");
