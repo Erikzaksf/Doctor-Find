@@ -18,22 +18,23 @@ export class DoctorSearch {
         } else {
           reject(Error(request.statusText));
         }
-        return Promise.all(promises);
+        // return response
       }
       request.open("GET", url, true);
       request.send();
+    });
 
       promise.then(function(response) {
-        body = JSON.parse(response);
-        $('.name').text(`Name:${data.profile.first_name}${data.profile.last_name}`);
-        $('.address').text(`Address:${data.practice.visit_address}`);
-        $('.phone').text(`Phone:${data.practice.phones[0]}`)
-        $('patients').text(`Accepting new patients: ${doctor.practices[0].accepts_new_patient}`)
+         let body = JSON.parse(response);
+        $('.name').text(`Name:${body.data[0].profile.first_name}${body.data[0].profile.last_name}`);
+        // $('.address').text(`Address:${data.practice.visit_address}`);
+        // $('.phone').text(`Phone:${data.practice.phones[0]}`)
+        // $('patients').text(`Accepting new patients: ${data.practices[0].accepts_new_patient}`)
       },  function(error) {
         $('.showErrors').text(`There was an error processing your request: ${error.message}`);
       });
-      return Promise.all(promises);
-    });
+
+
 
   }
 }
