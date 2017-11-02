@@ -18,21 +18,22 @@ export class DoctorSearch {
         } else {
           reject(Error(request.statusText));
         }
-        // return response
       }
       request.open("GET", url, true);
       request.send();
     });
 
       promise.then(function(response) {
-         let body = JSON.parse(response);
-        $('.name').text(`Name:${body.data[0].profile.first_name}${body.data[0].profile.last_name}`);
-        // $('.address').text(`Address:${data.practice.visit_address}`);
-        // $('.phone').text(`Phone:${data.practice.phones[0]}`)
-        // $('patients').text(`Accepting new patients: ${data.practices[0].accepts_new_patient}`)
-      },  function(error) {
-        $('.showErrors').text(`There was an error processing your request: ${error.message}`);
-      });
+        let body = JSON.parse(response);
+          $('.name').text(`Name:${body.data[0].profile.first_name}${body.data[0].profile.last_name}`);
+          $('.address').text(`Address:${body.data[0].practices[0].visit_address.city}, ${body.data[0].practices[0].visit_address.state}, ${body.data[0].practices[0].visit_address.city}`);
+          $('.phone').text(`Phone:${body.data[0].practices[0].phones[0].number}`);
+          $('patients').text(`Accepting new patients: ${body.data[0].practices[0].accepts_new_patient}`)
+        },
+          function(error) {
+        $('.showErrors').text(`There was an error processing your request: ${error.message}`)
+        });
+
 
 
 
